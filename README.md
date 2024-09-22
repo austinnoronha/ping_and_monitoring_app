@@ -33,3 +33,55 @@ Ensure you have the following installed:
    ```bash
    git clone https://github.com/yourusername/ping-api-monitoring.git
    cd ping-api-monitoring
+
+### 3. Run App
+   ```bash
+   poetry run uvicorn app.main:app --reload
+
+   # run test
+   poetry run pytest
+   #or
+   pytest
+
+## Common Settings
+
+## Poetry
+Activate the Poetry Virtual Environment
+Once you've installed your dependencies with Poetry, you can activate the virtual environment.
+   ```bash
+   poetry shell
+
+
+To exit
+   ```bash
+   exit
+
+## Ruff
+To set up Ruff (a linter) and integrate it with your project using Poetry, follow these steps:
+`poetry add --dev ruff`
+
+This will install Ruff and add it to your pyproject.toml file under the [tool.poetry.dev-dependencies] section.
+
+Configure Ruff in the pyproject.toml
+Once Ruff is installed, you need to configure it. Open your `pyproject.toml` file and add a `[tool.ruff]` section like this:
+
+```bash
+[tool.ruff]
+line-length = 88  # Set the maximum line length (similar to black or flake8)
+target-version = "py39"  # Target Python version
+
+[tool.ruff.per-file-ignores]
+# Ignore specific rules in certain files or directories
+"tests/*" = ["F401"]  # Ignore unused imports in tests
+
+# Enable specific rules or exclusions (optional)
+# Uncomment and customize based on your project needs
+# select = ["E", "F", "I", "N", "A"]
+# ignore = []
+```
+
+Summary of Commands
+- Install Ruff: `poetry add --dev ruff`
+- Run Linting: `poetry run ruff check .`
+- Fix Linting Issues: `poetry run ruff fix .`
+- Set Up Pre-commit (optional): `poetry run pre-commit install`
