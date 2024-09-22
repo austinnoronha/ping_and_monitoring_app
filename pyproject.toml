@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "ping-and-monitoring-app"
+version = "0.1.0"
+description = "This project is designed to ping APIs at regular intervals to ensure their uptime and functionality. It is an open-source project, and contributions are welcome to help improve its features."
+authors = ["Austin Noronha <austin_noronha@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.group.dev.dependencies]
+fastapi = "^0.115.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
