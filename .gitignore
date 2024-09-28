@@ -16,6 +16,7 @@ poetry.lock
 
 # Pytest cache
 .cache/
+.*cache/
 
 # System-specific files
 .DS_Store
