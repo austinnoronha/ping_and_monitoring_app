@@ -1,0 +1,69 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <h2>Ping API Form</h2>
+  <div id="#loader" style="display: none;">Loading...</div>
+  <div id="#responseMessage" class="hide"></div>
+  <form id="ping-form" action="/ping/store" method="POST">
+    <div class="mb-3">
+      <label for="url" class="form-label">API URL</label>
+      <input type="url" class="form-control" id="url" name="url" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="request_type" class="form-label">Request Type</label>
+      <select
+        class="form-select"
+        id="request_type"
+        name="request_type"
+        required
+      >
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+      </select>
+    </div>
+
+    <div class="mb-3" id="payload-section" style="display: none">
+      <label for="payload" class="form-label">Payload (JSON)</label>
+      <textarea
+        class="form-control"
+        id="payload"
+        name="payload"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ping API</button>
+  </form>
+</div>
+
+<script>
+      document.getElementById('request_type').addEventListener('change', function () {
+          var requestType = this.value;
+          var payloadSection = document.getElementById('payload-section');
+          if (requestType === 'POST' || requestType === 'PUT') {
+              payloadSection.style.display = 'block';
+          } else {
+              payloadSection.style.display = 'none';
+          }
+      });
+
+
+    $(document).ready(function() {
+      const ajaxManager = new AjaxManager('#loader', '#responseMessage');
+
+      
+      $('#ping-form').on('submit', function(event) {
+          event.preventDefault();
+          const formData = ajaxManager.getFormData('#'+$(this).attr('id'));
+          alert('formData ' + formData)
+          console.log("formData, ", formData)
+          ajaxManager.ajaxRequest($(this).attr('method') || 'POST', $(this).attr('action'), formData, () => {
+            ajaxManager.showMessage('success', 'API added successfully!');
+            ajaxManager.resetForm(formSelector);
+          });
+      });
+    });
+</script>
+{% endblock %}

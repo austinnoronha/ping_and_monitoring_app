@@ -30,7 +30,7 @@ repos:
       args: [--fix]
     - id: pytest
       name: pytest
-      entry: poetry run coverage run
+      entry: poetry run coverage run 
       pass_filenames: false
       language: system
       types: [python]
